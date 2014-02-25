@@ -19,4 +19,4 @@ d1 = foreach data2 generate group, COUNT($1.$0),flatten($1.$4);
 dd1 = order d1 by $1 desc;
 dd2 = join data by $4, dd1 by $2;
 
---store dd2 into 'grp-joined';
+store dd2 into 'grp-joined';
