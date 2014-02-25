@@ -91,7 +91,7 @@ the best five from the cluster. Please refer to recommender.pig for more details
 The best five cars were computed based on how close in price they are from the given (observed car). I used com.sample.pig.PriceDiffUDF which
 computed the difference between msrp price of the given car to the current msrp in that cluster. I sorted the differences in ascending order and returned the least deviated cars.    
 
-### Notes/ideas use LSH on engine column and create cluster based on LSH ###
+# Notes/ideas use LSH on engine column and create cluster based on LSH #
 
   
 
