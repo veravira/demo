@@ -23,12 +23,18 @@ public class GenderUDF extends EvalFunc<String> {
 	       }
 	       String firstname = (String)tuple.get(0);
 	       try{
-	    	   log.info("getting the first name {}", firstname);
+	    	   log.info("getting the first name {}", firstname);	    	   
+	    	   if (firstname.contains(" ")) {
+	    		   log.warn("no compound names {} will take first part of the name", firstname);
+	    		   firstname =  firstname.split(" ")[0];
+	    	   }
 	           gender = finder.getGender(firstname);           
 	           log.info("getting the first name {} and computing gender as {}", firstname, gender); 
 	           return gender;
-	        }
+	        }	       
 	       catch(Exception e) {
+	    	   log.error("Error is UDF parsung getGender will try another {} ", finder.toString());
+	    	   log.error("Error is UDF parsung getGender will try another {} ", firstname);	    
 	           throw new IOException(e);
 	        }	       
 	    }
