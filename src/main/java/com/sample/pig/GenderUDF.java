@@ -10,7 +10,7 @@ import org.slf4j.Logger;
 
 
 public class GenderUDF extends EvalFunc<String> {
-		final Logger log = LoggerFactory.getLogger(GenderUDF.class);
+	   final Logger log = LoggerFactory.getLogger(GenderUDF.class);
 	   GenderByName finder = new GenderByName();	
 	   @Override
 	   public String exec(Tuple tuple)throws IOException {
