@@ -1,10 +1,8 @@
 package com.sample.pig;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 
 import org.apache.pig.EvalFunc;
 import org.apache.pig.backend.executionengine.ExecException;
@@ -52,8 +50,7 @@ public class BundleToVecUDF extends EvalFunc<Tuple>{
        if(tuple ==null|| tuple.size()<1) {    	   
     	   log.error("tuple is null");
        }
-       else {
-    	   log.error("tuple is NOT NULL !!!!!!! ");
+       else {    	   
     	   populateBundleSpace();
     	   t = populateTuple(tuple);
        }
@@ -101,7 +98,6 @@ public class BundleToVecUDF extends EvalFunc<Tuple>{
     	for (int i=0; i<inTuple.size(); ++i)
     	{
     		String curPrint = "unknown";
-//    		List<String> prints = new ArrayList<String>();
     		try{
     			Object values = inTuple.get(0);
                 if (values instanceof DataBag)
@@ -126,7 +122,13 @@ public class BundleToVecUDF extends EvalFunc<Tuple>{
                 		curPrint = (String)iter.next();
                 		System.out.println("In Vector UDF " + curPrint);
                 		log.info("Looking at {}", curPrint);
-            			outTuple.set(this.printSpace.get(curPrint), 1);
+                		if (this.printSpace.get(curPrint) == null)
+                		{
+                			log.info("Skipping this Print {}" +curPrint);
+                		}
+                		else {
+                			outTuple.set(this.printSpace.get(curPrint)-1, 1);
+                		}
                 	}
                 }
                 else {
